@@ -20,8 +20,14 @@
       scroll-behavior: smooth;
     }
     body {
-      height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Static gradient background */
+      /* Use min-height so the gradient can extend if content is taller than 100vh */
+      min-height: 100vh;
+      /* Static gradient background, sized to cover the entire screen */
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      background-attachment: fixed; /* keeps the gradient fixed in place */
+      background-repeat: no-repeat;
+      background-size: cover;
+      
       font-family: 'Roboto', sans-serif;
       overflow-x: hidden;
       color: #fff;
@@ -166,9 +172,11 @@
       const msg = document.getElementById('longTimeMsg');
       msg.style.display = (msg.style.display === 'none' || msg.style.display === '') ? 'block' : 'none';
     }
-    // Create confetti on page load
+    
+    // Create fewer confetti on page load
     function createConfetti() {
-      for (let i = 0; i < 300; i++) {
+      const confettiCount = 100; // Reduced from 300 to 100
+      for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
         // Random horizontal position and color
@@ -183,6 +191,7 @@
         });
       }
     }
+    
     window.onload = () => {
       createConfetti();
     };
