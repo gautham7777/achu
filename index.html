@@ -2,27 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday!</title>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
+    /* Reset & Basic Setup */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
-      position: relative;
       height: 100vh;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       font-family: 'Roboto', sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       color: #fff;
+      position: relative;
     }
+    
     /* Animated background element */
     .background-animation {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -42,19 +50,34 @@
         transform: scale(1) rotate(360deg);
       }
     }
-    /* Container for all content with border */
+    
+    /* Ribbons at top corners */
+    .ribbon {
+      position: absolute;
+      width: 120px;
+      height: 40px;
+      background: #ff69b4;
+      top: 10px;
+      z-index: 100;
+      clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+      opacity: 0.9;
+    }
+    .ribbon-left {
+      left: 10px;
+      transform: rotate(-20deg);
+    }
+    .ribbon-right {
+      right: 10px;
+      transform: rotate(20deg);
+    }
+    
+    /* Container for all content with a border */
     .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 90%;
       width: 90%;
       max-width: 800px;
+      margin: 40px auto;
+      padding: 40px 20px;
       text-align: center;
-      padding: 40px;
-      margin: auto;
-      backdrop-filter: blur(4px);
       border: 3px solid rgba(255, 255, 255, 0.8);
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -62,25 +85,7 @@
       position: relative;
       z-index: 1;
     }
-    /* Ribbons at top corners */
-    .ribbon {
-      position: absolute;
-      width: 120px;
-      height: 40px;
-      background: #ff69b4;
-      top: 0;
-      z-index: 100;
-      clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-      opacity: 0.9;
-    }
-    .ribbon-left {
-      left: 0;
-      transform: translate(-20%, -20%) rotate(-20deg);
-    }
-    .ribbon-right {
-      right: 0;
-      transform: translate(20%, -20%) rotate(20deg);
-    }
+    
     /* Main Birthday Message */
     h1 {
       font-family: 'Dancing Script', cursive;
@@ -88,7 +93,6 @@
       margin-bottom: 20px;
       text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
       animation: pop 0.5s ease-in-out;
-      z-index: 1000;
     }
     @keyframes pop {
       0% {
@@ -100,15 +104,18 @@
         opacity: 1;
       }
     }
+    
     /* Loving and sappy text paragraphs */
     .love-text {
       font-size: 1.3rem;
       margin-bottom: 20px;
-      max-width: 700px;
       line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 20px;
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
     }
-    /* Updated pretty button */
+    
+    /* Pretty button */
     .long-time-button {
       font-size: 1.2rem;
       padding: 14px 30px;
@@ -119,22 +126,24 @@
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s ease, background 0.3s ease;
-      z-index: 1000;
       margin-top: 20px;
     }
     .long-time-button:hover {
       background: linear-gradient(45deg, #ffc3a0, #ffafbd);
       transform: scale(1.05);
     }
-    /* Hidden special message (revealed on button click) */
+    
+    /* Special message (hidden by default) */
     #longTimeMsg {
       display: none;
       margin-top: 20px;
       font-size: 1.2rem;
-      max-width: 700px;
       line-height: 1.6;
+      max-width: 700px;
+      margin: 20px auto 0;
       text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
     }
+    
     /* Confetti */
     .confetti {
       position: fixed;
@@ -155,12 +164,27 @@
         transform: translateY(100vh) rotate(720deg);
       }
     }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 3rem;
+      }
+      .love-text {
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+      .long-time-button {
+        font-size: 1rem;
+        padding: 12px 24px;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Animated background element -->
   <div class="background-animation"></div>
-
+  
   <!-- Ribbons on top corners -->
   <div class="ribbon ribbon-left"></div>
   <div class="ribbon ribbon-right"></div>
